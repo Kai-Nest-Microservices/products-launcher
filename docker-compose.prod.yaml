@@ -13,7 +13,7 @@ services:
       dockerfile: dockerfile.prod
     ports:
       - ${CLIENT_GATEWAY_PORT}:${CLIENT_GATEWAY_PORT}
-    image: client-gateway-prod
+    image: southamerica-east1-docker.pkg.dev/microservices-dev-482322/image-registry/client-gateway
     environment:
       - PORT=${CLIENT_GATEWAY_PORT}
       - NATS_SERVERS=nats://nats-server:4222
@@ -22,7 +22,7 @@ services:
     build: 
       context: ./products-ms
       dockerfile: dockerfile.prod
-    image: products-ms-prod
+    image: southamerica-east1-docker.pkg.dev/microservices-dev-482322/image-registry/products-ms
     volumes:
       - ./products-ms/dev.db:/usr/src/app/dev.db
     environment:
@@ -36,7 +36,7 @@ services:
       dockerfile: dockerfile.prod
       args:
         - DATABASE_URL=${ORDERS_DATABASE_URL}
-    image: orders-ms-prod
+    image: southamerica-east1-docker.pkg.dev/microservices-dev-482322/image-registry/orders-ms
     environment:
       - PORT=3000
       - DATABASE_URL=${ORDERS_DATABASE_URL}
@@ -64,6 +64,7 @@ services:
     build: 
       context: ./payments-ms
       dockerfile: dockerfile.prod
+    image: southamerica-east1-docker.pkg.dev/microservices-dev-482322/image-registry/payments-ms
     ports:
       - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
     environment:
@@ -80,7 +81,7 @@ services:
       dockerfile: dockerfile.prod
       args:  
         - DATABASE_URL=${AUTH_DATABASE_URL}
-    image: auth-ms-prod
+    image: southamerica-east1-docker.pkg.dev/microservices-dev-482322/image-registry/auth-ms
     environment:
       - PORT=3000
       - NATS_SERVERS=nats://nats-server:4222
